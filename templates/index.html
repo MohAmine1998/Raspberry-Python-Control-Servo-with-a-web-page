@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+
+
+<div>
+ 
+<h1>Control Robot ARM</h1>
+  <br>
+  <input type="range" value="70" min="0" max="100" id="range" oninput="rangenumber.value=value"/>
+  <input type="number" id="rangenumber" min="0" max="100" value="70" oninput="range.value=value">
+ 
+
+</div>
+
+<div class="main" id="newpost">
+  <img  class="camera-bg" style="width: 100%; height:80%; background-attachment: fixed;" id="bg" class="center" src="{{ url_for('video_feed') }}">
+   
+</div>
+
+
+<script>
+const rangeInputs = document.querySelectorAll('input[type="range"]')
+const numberInput = document.querySelector('input[type="number"]')
+
+function handleInputChange(e) {
+  let target = e.target
+  if (e.target.type !== 'range') {
+    target = document.getElementById('range')
+  } 
+  const min = target.min
+  const max = target.max
+  const val = target.value
+  
+  target.style.backgroundSize = (val - min) * 100 / (max - min) + '% 100%'
+}
+
+rangeInputs.forEach(input => {
+  input.addEventListener('input', handleInputChange)
+})
+
+numberInput.addEventListener('input', handleInputChange)
+</script>
+
+
+
+
+</body>
+</html>
